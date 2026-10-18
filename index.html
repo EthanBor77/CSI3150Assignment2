@@ -14,18 +14,23 @@
         <a href="#log-section">Telemetry Logs</a>
       </nav>
     </header>
+
     <main class="portal-main">
       <section id="input-section" class="input-panel">
         <header class="panel-header">
           <h2>Record Bay Telemetry</h2>
         </header>
-        <form id="sensor-form">
+
+        <div id="error-banner" class="error-banner" role="alert" hidden></div>
+
+        <form id="sensor-form" novalidate>
           <div class="input-group">
             <label for="bay-input">Bay Identifier</label>
             <input
               id="bay-input"
               type="text"
               placeholder="e.g., Bay-01"
+              maxlength="20"
               required
             />
           </div>
@@ -34,6 +39,7 @@
             <input
               id="ph-input"
               type="number"
+              placeholder="e.g., 6.2"
               min="0"
               max="14"
               step="0.1"
@@ -45,6 +51,7 @@
             <input
               id="ec-input"
               type="number"
+              placeholder="e.g., 1.5"
               min="0"
               max="10"
               step="0.1"
@@ -56,6 +63,7 @@
             <input
               id="temp-input"
               type="number"
+              placeholder="e.g., 72"
               min="32"
               max="120"
               step="0.1"
@@ -67,34 +75,35 @@
             <input
               id="rh-input"
               type="number"
+              placeholder="e.g., 60"
               min="0"
               max="100"
               step="1"
               required
             />
           </div>
-          <button id="btn-submit" type="submit">Record Reading</button>
+          <div class="form-actions">
+            <button id="btn-submit" type="submit">Record Reading</button>
+            <button id="btn-reset" type="reset">Clear Fields</button>
+          </div>
         </form>
       </section>
 
       <section id="log-section" class="output-panel">
         <header class="output-header">
           <h2>Active Telemetry Logs</h2>
-          <button class="danger-btn">Purge Queue</button>
+          <button id="btn-purge-all" class="danger-btn" type="button">
+            Purge Queue
+          </button>
         </header>
-        <div id="log-container" class="log-queue">
-          <article class="log-card">
-            <div class="log-details">
-              <h3>Bay-01 | Optimal</h3>
-              <p>pH: 6.2 | EC: 1.5 mS/cm | Temp: 68F | RH: 60%</p>
-            </div>
-            <button class="btn-delete-log">Delete</button>
-          </article>
-        </div>
+        <div id="log-container" class="log-queue" aria-live="polite"></div>
       </section>
     </main>
+
     <footer class="portal-footer">
       <p>AgroSense Systems - Field Operations Unit</p>
     </footer>
+
+    <script src="app.js"></script>
   </body>
 </html>
