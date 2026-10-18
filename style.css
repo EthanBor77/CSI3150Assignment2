@@ -35,6 +35,19 @@ html {
   line-height: 1.6;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}
+
+a {
+  color: var(--primary);
+}
+
 a:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
@@ -353,4 +366,16 @@ a:focus-visible {
   border-top: 1px solid var(--border-color);
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+@media (max-width: 40rem) {
+  .portal-header,
+  .portal-main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #sensor-form {
+    grid-template-columns: 1fr;
+  }
 }
